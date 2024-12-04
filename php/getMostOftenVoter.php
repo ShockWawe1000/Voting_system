@@ -11,12 +11,11 @@ if (!$con) {
 $id = $_SESSION['id'];
 
 
-$query = "SELECT u.name, u.surname
+$query = "SELECT  name, surname
             FROM endorsements e
-            JOIN users u ON e.votee_id = u.id
-            WHERE e.culture_champ = 1
-            GROUP BY e.votee_id
-            ORDER BY COUNT(e.votee_id) DESC
+            JOIN users u ON e.voter_id = u.id
+            GROUP BY e.voter_id
+            ORDER BY COUNT(e.voter_id) DESC
             LIMIT 1;";
 
 
@@ -26,17 +25,13 @@ try{
 catch(mysqli_sql_exception){
      output_error("Query error")  ;
 }
+
+if (mysqli_num_rows($result)>0){
 $row = mysqli_fetch_assoc($result);
-if (empty($row))
-{
-    $row = array(     
-            'name '=> 'There isnt a winner yet!',
-            'surname' => ''
-  
-    );
-    echo json_encode($row);  
 }
-else
+
+
 echo json_encode($row);  
+
 mysqli_close($con);  
 ?>

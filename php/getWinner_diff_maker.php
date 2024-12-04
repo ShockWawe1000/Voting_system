@@ -11,16 +11,14 @@ if (!$con) {
 $id = $_SESSION['id'];
 
 
-$query = "SELECT 
-    votee_id,
-    SUM(diff_maker) AS diff_maker_votes
-FROM 
-    votes_table
-GROUP BY 
-    votee_id
-ORDER BY 
-    diff_maker_votes DESC
-LIMIT 1;";
+$query = "SELECT u.name, u.surname
+            FROM endorsements e
+            JOIN users u ON e.votee_id = u.id
+            WHERE e.diff_maker = 1
+            GROUP BY e.votee_id
+            ORDER BY COUNT(e.votee_id) DESC
+            LIMIT 1;
+            ";
 
 
 try{
@@ -29,18 +27,21 @@ try{
 catch(mysqli_sql_exception){
      output_error("Query error")  ;
 }
-
-if (mysqli_num_rows($result)>0){
 $row = mysqli_fetch_assoc($result);
-}
 
-if ($result->num_rows > 0) {
-    while ($row = $result->fetch_assoc()) {
-        $users[] = $row;  
-    }
-}
+$row = mysqli_fetch_assoc($result);
 
-echo json_encode($users);  
+if (empty($row))
+{
+    $row = array(     
+            'name '=> 'There isnt a winner yet!',
+            'surname' => ''
+  
+    );
+    echo json_encode($row);  
+}
+else
+echo json_encode($row);  
 
 mysqli_close($con);  
 ?>

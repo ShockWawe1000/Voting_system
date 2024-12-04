@@ -11,17 +11,14 @@ if (!$con) {
 $id = $_SESSION['id'];
 
 
-$query = "SELECT 
-    votee_id,
-    SUM(team_player) AS team_player_votes
-FROM 
-    votes_table
-GROUP BY 
-    votee_id
-ORDER BY 
-    team_player_votes DESC
-LIMIT 1;";
-
+$query = "SELECT u.name, u.surname
+            FROM endorsements e
+            JOIN users u ON e.votee_id = u.id
+            WHERE e.team_player = 1
+            GROUP BY e.votee_id
+            ORDER BY COUNT(e.votee_id) DESC
+            LIMIT 1;
+";
 
 try{
     $result = mysqli_query($con,$query) or die("Select Error");
@@ -29,18 +26,18 @@ try{
 catch(mysqli_sql_exception){
      output_error("Query error")  ;
 }
-
-if (mysqli_num_rows($result)>0){
 $row = mysqli_fetch_assoc($result);
+if (empty($row))
+{
+    $row = array(     
+            'name '=> 'There isnt a winner yet!',
+            'surname' => ''
+  
+    );
+    echo json_encode($row);  
 }
-
-if ($result->num_rows > 0) {
-    while ($row = $result->fetch_assoc()) {
-        $users[] = $row;  
-    }
-}
-
-echo json_encode($users);  
+else
+echo json_encode($row);  
 
 mysqli_close($con);  
 ?>

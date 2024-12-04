@@ -13,20 +13,29 @@
          include("php/config.php");
          if($_SERVER["REQUEST_METHOD"] == "POST"){
 
-            $name = filter_input(INPUT_POST , "name" , FILTER_SANITIZE_SPECIAL_CHARS);
-            $surname = filter_input(INPUT_POST , "surname" , FILTER_SANITIZE_SPECIAL_CHARS);
-            $username = filter_input(INPUT_POST , "username" , FILTER_SANITIZE_SPECIAL_CHARS);
-            $password = filter_input(INPUT_POST , "password" , FILTER_SANITIZE_SPECIAL_CHARS);
+            function clean($string) {
+                $string = str_replace('', '-', $string); 
+                return preg_replace('/[^A-Za-z0-9\-]/', '', $string); 
+             }
+
+            $name = strip_tags(filter_input(INPUT_POST , "name" , FILTER_DEFAULT));
+            $surname = strip_tags(filter_input(INPUT_POST , "surname" , FILTER_DEFAULT));
+            $username = strip_tags(filter_input(INPUT_POST , "username" , FILTER_DEFAULT));
+            $password = strip_tags(filter_input(INPUT_POST , "password" , FILTER_DEFAULT));
             
             //          ISSUE:
             //          <>/ special chars can and will break code
+            //          FIXED
 
          //here we get the data from the html form, filtering any malicious content
          // instead of filter i need to remove any and all special characters, make errors with JSON parsing
-
+ //          FIXED
             if(empty($name) || empty($surname) ||empty($username) ||empty($password))
             {
+                output_error("Bad characters detected!")  ;
                 //bug, need to sort out why this  code  triggers without this if all fields are not set
+                    //found use for the bug
+                     //          FIXED
             }
 
             else{

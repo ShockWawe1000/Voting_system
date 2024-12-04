@@ -29,8 +29,6 @@ catch(mysqli_sql_exception){
 }
 $row = mysqli_fetch_assoc($result);
 
-$row = mysqli_fetch_assoc($result);
-
 if (empty($row))
 {
     $row = array(     

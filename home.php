@@ -167,40 +167,28 @@
     url: 'php/getlatestVotes.php', 
     type: 'GET',
     success: function(response) {
-        
-        var votesData = JSON.parse(response);
+    var votesData = JSON.parse(response);
 
+    var tableHTML = `
+        <table class="table">
        
-        var tableHTML = `
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th>Voter ID</th>
-                        <th>Votee ID</th>
-                        <th>Work Fun</th>
-                        <th>Team Player</th>
-                        <th>Culture Champ</th>
-                        <th>Difference Maker</th>
-                     
-                    </tr>
-                </thead>
-                <tbody>
-        `;
+            <tbody>
+    `;
 
-        
-        votesData.forEach(function(entry) {
-            tableHTML += `
-                <tr>
-                    <td>${entry.voter_id}</td>
-                    <td>${entry.votee_id}</td>
-                    <td>${entry.work_fun === "1" ? 'Yes' : 'No'}</td>
-                    <td>${entry.team_player === "1" ? 'Yes' : 'No'}</td>
-                    <td>${entry.culture_champ === "1" ? 'Yes' : 'No'}</td>
-                    <td>${entry.diff_maker === "1" ? 'Yes' : 'No'}</td>
-            
-                </tr>
-            `;
-        });
+    votesData.forEach(function(entry) {
+    tableHTML += `
+        <tr>
+            <td>${entry.voter_name} ${entry.voter_surname}</td>
+            <td>></td>
+            <td>${entry.votee_name} ${entry.votee_surname}</td>
+            <td>${entry.work_fun === "1" ? '<img src="src/end/makes_work_fun.png" alt="Work Fun" style=" width: 50px; height: 50px;  border-radius: 50%;  margin-right: 10px;" />' : ''}</td>
+            <td>${entry.team_player === "1" ? '<img src="src/end/team_player.png" alt="Team Player" style=" width: 50px; height: 50px;  border-radius: 50%;  margin-right: 10px;"/>' : ''}</td>
+            <td>${entry.culture_champ === "1" ? '<img src="src/end/culture_champ.png" alt="Culture Champ" style=" width: 50px; height: 50px;  border-radius: 50%;  margin-right: 10px;"/>' : ''}</td>
+            <td>${entry.diff_maker === "1" ? '<img src="src/end/diff_maker.png" alt="Difference Maker" style=" width: 50px; height: 50px;  border-radius: 50%;  margin-right: 10px;"/>' : ''}</td>
+        </tr>
+    `;
+});
+
 
         
         tableHTML += `

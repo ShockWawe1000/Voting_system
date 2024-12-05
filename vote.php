@@ -22,7 +22,7 @@
 <main>
      <div class="boxVote" style="background:#e1f1fd">
    
-        <div id="userList" class="box_transparentUserList"></div>
+        <div id="userList" class="box_transparentUserList" style="height:100%;"></div>
         
         <div id="voteSection" >
 

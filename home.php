@@ -35,6 +35,7 @@
                     $id = $result['id'];
                 }
             ?>
+            <a href="cert.php"><button class="btn" style = "background-color: transparent; color: black;">Certificates</button></a>
             <a href="php/logout.php"><button class="btn">Log Out</button></a>
         </div>
     </div>
@@ -61,26 +62,31 @@
           <div class="bottom">
               <div class="box_transparentVotes" >
                     
-                    <div class="box_transparent" style=" flex-direction:column;  align-items:center; width:188px; height:100%;">
-                    <img src="src/win/makes_work_fun_winner.png" alt="cultureChampWinner" style=" width: 100px; height: 100px;   ">
+                    <div class="box_transparent" style=" flex-direction:column;  align-items:center; width:188px; height:100%;" onclick="submitCategory('Makes Work Fun')">
+                    <img src="src/win/makes_work_fun_winner.png" alt="cultureChampWinner" style=" width: 100px; height: 100px;">
                         Makes Work Fun
-                        <div id="workFunWinner" class="textWinner" "></div> 
+                        <div id="workFunWinner" class="textWinner" ></div> 
+                        
                     </div>
-                    <div class="box_transparent" style=" flex-direction:column;  align-items:center; width:188px; height:100%;">
+                    <div class="box_transparent" style=" flex-direction:column;  align-items:center; width:188px; height:100%;" onclick="submitCategory('Team Player')">
                     <img src="src/win/team_player_winner.png" alt="cultureChampWinner" style=" width: 100px; height: 100px; ">
                         Team Player
-                        <div id="teamPlayerWinner"  class="textWinner" "></div> 
+                        <div id="teamPlayerWinner"  class="textWinner" ></div> 
+                        
                     </div>
-                    <div class="box_transparent" style=" flex-direction:column;  align-items:center; width:188px; height:100%;">
+                    <div class="box_transparent" style=" flex-direction:column;  align-items:center; width:188px; height:100%;" onclick="submitCategory('Culture Champion')">
                     <img src="src/win/culture_champ_winner.png" alt="cultureChampWinner" style=" width: 100px; height: 100px; ">
                         Culture Champ
                         <div id="cultureChampWinner" class="textWinner"> >No Person Won this yet!</div> 
+                       
                     </div>
-                    <div class="box_transparent" style=" flex-direction:column;  align-items:center; width:188px; height:100%;" >
+                    <div class="box_transparent" style=" flex-direction:column;  align-items:center; width:188px; height:100%; "  onclick="submitCategory('Difference Maker')">
                     <img src="src/win/diff_maker_winner.png" alt="cultureChampWinner" style=" width: 100px; height: 100px;  ">
                         Difference Maker
                         <div class="textWinner" id="diffMakerWinner"  >No Person Won this yet!</div> 
+                      
                     </div>
+                    
               </div>
           </div>
 
@@ -185,49 +191,48 @@
 
            
             $.ajax({
-    url: 'php/getlatestVotes.php', 
-    type: 'POST',
-    success: function(response) {
-    var votesData = JSON.parse(response);
+                    url: 'php/getlatestVotes.php', 
+                    type: 'POST',
+                    success: function(response) {
+                    var votesData = JSON.parse(response);
 
-    var tableHTML = `
-        <table >
-       
-            <tbody>
-    `;
+                    var tableHTML = `
+                        <table >
+                    
+                            <tbody>
+                    `;
 
-    votesData.forEach(function(entry) {
-    tableHTML += `
-        <tr class="table">
-            <td>${entry.voter_name} ${entry.voter_surname}</td>
-            <td>></td>
-            <td>${entry.votee_name} ${entry.votee_surname}</td>
-            <td class="">${entry.work_fun === "1" ? '<img class = "tableItems " src="src/end/makes_work_fun.png" alt="Work Fun" />' : ''}</td>
-            <td>${entry.team_player === "1" ? '<img  class = "tableItems " src="src/end/team_player.png" alt="Team Player" />' : ''}</td>
-            <td>${entry.culture_champ === "1" ? '<img class = "tableItems " src="src/end/culture_champ.png" alt="Culture Champ" />' : ''}</td>
-            <td>${entry.diff_maker === "1" ? '<img  class = "tableItems " src="src/end/diff_maker.png" alt="Difference Maker" />' : ''}</td>
-        </tr>
-    `;
-});
-
-
-        
-        tableHTML += `
-                </tbody>
-            </table>
-        `;
-
-       
-        $('#latestVotes').html(tableHTML); 
-    },
-    error: function() {
-        $('#latestVotes').html('Error fetching data');
-    }
-});
+                    votesData.forEach(function(entry) {
+                    tableHTML += `
+                        <tr class="table">
+                            <td>${entry.voter_name} ${entry.voter_surname}</td>
+                            <td>></td>
+                            <td>${entry.votee_name} ${entry.votee_surname}</td>
+                            <td class="">${entry.work_fun === "1" ? '<img class = "tableItems " src="src/end/makes_work_fun.png" alt="Work Fun" />' : ''}</td>
+                            <td>${entry.team_player === "1" ? '<img  class = "tableItems " src="src/end/team_player.png" alt="Team Player" />' : ''}</td>
+                            <td>${entry.culture_champ === "1" ? '<img class = "tableItems " src="src/end/culture_champ.png" alt="Culture Champ" />' : ''}</td>
+                            <td>${entry.diff_maker === "1" ? '<img  class = "tableItems " src="src/end/diff_maker.png" alt="Difference Maker" />' : ''}</td>
+                        </tr>
+                    `;
+                });
 
 
-            
-        });
+                        
+                        tableHTML += `
+                                </tbody>
+                            </table>
+                        `;
+
+                    
+                        $('#latestVotes').html(tableHTML); 
+                    },
+                    error: function() {
+                        $('#latestVotes').html('Error fetching data');
+                    }
+                });
+
+
+ });
 
 
         

@@ -194,7 +194,7 @@ $(document).ready(function() {
             success: function(response) {
                 alert("Vote submitted successfully!");
 
-                
+                // Clear fields
                 $('#commentField').val('');
                 $('.icon-button').removeClass('active');
                 $('#endorseButton').prop('disabled', true);

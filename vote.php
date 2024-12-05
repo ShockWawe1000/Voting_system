@@ -103,7 +103,7 @@ $(document).ready(function() {
         },
         error: function() {
             console.log("Error fetching user data.");
-            $("#userList").html("Error fetching user data.");
+            $("#userList").html("Woah, nobody here but you... and yourself!");
         }
     });
 

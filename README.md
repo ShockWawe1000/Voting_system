@@ -37,8 +37,6 @@ making us take more time to solve problems
 
 ![Image](misc/3.jpg)
 
-## Cat!
-![Image](misc/cat2.jpg)
 
 ## NOTICE READ THIS BEFORE YOU SEE MY CODE
 
@@ -53,3 +51,8 @@ I have used AI in this project. But not as a code-writing tool but as a search e
 I have also used code snippets from StackOverflow and a git repo from CodeSnippets for the certificate
 
 I hope this project shows you that even though I may not have the nescessary knowledge at first, I learn fast and always persevere, always resulting to success!
+
+
+
+## Cat!
+![Image](misc/cat2.jpg)

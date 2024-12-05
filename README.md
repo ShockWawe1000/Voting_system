@@ -49,7 +49,7 @@ Most of this redundancy could have been avoided, and 99% of the project would ha
 put php values in between HTML. 
 I don't know if I breached any unspoken internship rule as I haven't read any but I feel morally obliged to notify you of the following:
 I have used AI in this project. But not as a code-writing tool but as a search engine to figure out problems and brainstorm ideas.
-I have also used code snippets from StackOverflow and a git repo from CodeSnippets for the certificate
+I have also used code snippets from StackOverflow and a git repo from [CodeSnippets](https://github.com/gitcodes/fpdf) for the fpdf certificate
 
 I hope this project shows you that even though I may not have the nescessary knowledge at first, I learn fast and always persevere, always resulting to success!
 

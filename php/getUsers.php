@@ -11,7 +11,7 @@ if (!$con) {
 $id = $_SESSION['id'];
 
 
-$query = "SELECT id, name, surname FROM users WHERE id != '$id'";
+$query = "SELECT id, name, surname FROM users WHERE id != '$id' ORDER BY name ASC";
 
 
 try{
@@ -31,7 +31,7 @@ if ($result->num_rows > 0) {
     }
 }
 
-echo json_encode($users);  // Return the users as a JSON response
+echo json_encode($users);  
 
-mysqli_close($con);  // Close the database connection
+mysqli_close($con);  
 ?>

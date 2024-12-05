@@ -107,7 +107,7 @@ $(document).ready(function() {
         }
     });
 
-    // When a user is selected
+  
     $(document).on('click', '.userItem', function() {
         $('.userItem').removeClass('selected');
         $(this).addClass('selected');
@@ -125,22 +125,22 @@ $(document).ready(function() {
         $('#commentField').prop('disabled', false);
         $("#voteButtons").show();
 
-        checkFormValidity(); // Check if the form is valid after user selection
+        checkFormValidity();
     });
 
-    // When an icon button is clicked
+    
     $('.icon-button').on('click', function() {
         $(this).toggleClass('active');
         checkFormValidity();
     });
 
-    // Function to check the validity of the form
+
     function checkFormValidity() {
         var comment = $('#commentField').val().trim();
         var atLeastOneActive = $('.icon-button.active').length > 0;
-        var atLeastOneUserSelected = $('.userItem.selected').length > 0;  // Check if any user is selected
+        var atLeastOneUserSelected = $('.userItem.selected').length > 0;  
 
-        // Enable the endorse button if comment is filled, at least one button is active, and a user is selected
+
         if (comment.length > 0 && atLeastOneActive && atLeastOneUserSelected) {
             $('#endorseButton').prop('disabled', false);
         } else {
@@ -148,14 +148,14 @@ $(document).ready(function() {
         }
     }
 
-    // When the comment field is updated
+  
     $('#commentField').on('input', function() {
         checkFormValidity();
     });
 
-    // Endorse button click (submit vote)
+    
     $('#endorseButton').on('click', function() {
-        var selectedUserId = $(".userItem.selected").data('id');  // Get the selected votee ID
+        var selectedUserId = $(".userItem.selected").data('id'); 
         var comment = $('#commentField').val();
 
         var work_fun_temp = false;
@@ -180,21 +180,21 @@ $(document).ready(function() {
             url: 'php/submitVote.php',
             type: 'POST',
             data: {
-                // voter id we get from session
+               
                 votee_id: selectedUserId,  
 
-                // endorsements
+               
                 work_fun: work_fun_temp, 
                 team_player: team_player_temp,
                 culture_champ: culture_champ_temp, 
                 diff_maker: diff_maker_temp, 
-                // comment
+                
                 comment: comment  
             },
             success: function(response) {
                 alert("Vote submitted successfully!");
 
-                // Clear fields
+                
                 $('#commentField').val('');
                 $('.icon-button').removeClass('active');
                 $('#endorseButton').prop('disabled', true);

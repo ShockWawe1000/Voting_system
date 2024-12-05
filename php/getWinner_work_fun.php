@@ -28,16 +28,7 @@ catch(mysqli_sql_exception){
 }
 
 $row = mysqli_fetch_assoc($result);
-if (empty($row))
-{
-    $row = array(     
-            'name '=> 'There isnt a winner yet!',
-            'surname' => ''
-  
-    );
-    echo json_encode($row);  
-}
-else
+
 echo json_encode($row);  
 
 

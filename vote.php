@@ -7,133 +7,81 @@
     <title>Endorse</title>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <style>
-        *{
-            border: 2px solid red;
-            border-radius: 5px;
-            align-items: center;
-        }
-        #container {
-            display: flex;
-            justify-content: space-between;
-            padding: 10px;
-            align-self: center;
-            border: 2px solid seagreen;
-            max-width: 1000px;
-        }
-        #userList {
-            width: 40%;
-            max-height: 500px;
-            overflow-y: scroll;
-            border-right: 2px solid #ccc;
-        }
-        .userItem {
-            display: flex;
-            align-items: center;
-            margin: 10px;
-            cursor: pointer;
-        }
-        .userItem img {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            margin-right: 10px;
-        }
-        #voteSection {
-            width: 55%;
-            padding: 20px;
-            border-left: 2px solid #ccc;
-        }
-        #voteSection h2 {
-            margin-top: 0;
-        }
-        /* Icon button styling */
-        .icon-button {
-            width: 70px;
-            height: 70px;
-            display: inline-block;
-            background-color: #ddd;
-            border-radius: 50%;
-            text-align: center;
-            line-height: 70px;
-            cursor: pointer;
-            margin-right: 20px;
-            transition: background-color 0.3s ease;
-        }
-        .icon-button.active {
-            background-color: #4CAF50; /* Active state color */
-        }
-        .icon-button:hover {
-            background-color: #888;
-        }
-        /* Text below each button */
-        .button-label {
-            display: block;
-            text-align: center;
-            margin-top: 10px;
-            font-size: 14px;
-        }
-        /* Comment field styling */
-        #commentField {
-            width: 100%;
-            height: 100px;
-            margin-top: 20px;
-            padding: 10px;
-            font-size: 16px;
-        }
-        /* Endorse button styling */
-        #endorseButton {
-            margin-top: 20px;
-            padding: 10px 20px;
-            background-color: #4CAF50;
-            color: white;
-            border: none;
-            cursor: pointer;
-        }
-        #endorseButton:disabled {
-            background-color: #ccc;
-            cursor: not-allowed;
-        }
+       
     </style>
 </head>
 <body>
-
-<div class="box">
-    <div id="container">
-        <div id="userList"></div>
-        <div id="voteSection">
-            <div id="selectedUserInfo">
-                <p>No user selected yet.</p>
-            </div>
-
-            <div id="voteButtons">
-                <div class="icon-button" id="voteButton1">
-                    👍
-                    <span class="button-label">Makes Work Fun</span>
-                </div>
-                <div class="icon-button" id="voteButton2">
-                    👎
-                    <span class="button-label">Team Player</span>
-                </div>
-                <div class="icon-button" id="voteButton3">
-                    ❤️
-                    <span class="button-label">Culture Champion</span>
-                </div>
-                <div class="icon-button" id="voteButton4">
-                    🔥
-                    <span class="button-label">Difference Maker</span>
-                </div>
-            </div>
-
-            <textarea id="commentField" placeholder="Leave a comment..." maxlength="500"></textarea>
-            <button id="endorseButton" disabled>Endorse</button>
+<div class="nav">
+          <img class="logo" src="src/logo-final.svg" alt="Logo" href="home.php"/>
+        <div class="right-links">
+        <a href="php/logout.php"><button class="btn">Log Out</button></a>
         </div>
     </div>
+        </div>
 </div>
+<main>
+     <div class="boxVote" style="background:#e1f1fd">
+   
+        <div id="userList" class="box_transparentUserList"></div>
+        
+        <div id="voteSection" >
 
+                     <div class="voteBackButton">
+                     <a href="home.php" class="btnBack">Back</a>
+                    </div>
+                    <div id="selectedUserInfo" class="box_transparentUserList">
+                        <p>&lt; Select a user to endorse!</p>
+                    </div>
+
+                    
+                        <div id="voteButtons" class="box_transparentUserList">
+                            <div class="iconParent">
+                                <div class="icon-button" id="voteButton1">
+                                    <img class="voteIcon" src="src/end/makes_work_fun.png" alt="Work Fun" />
+                                    
+                                </div>
+                                <span class="button-label">Makes Work Fun</span>
+                            </div>
+                            
+                            <div class="iconParent" >
+                                <div class="icon-button" id="voteButton2">
+                                    <img class="voteIcon" src="src/end/team_player.png" alt="Team Player" />
+                                    
+                                </div> 
+                                <span class="button-label">Team Player</span>
+                            </div>
+                            
+                            <div class="iconParent" >
+                                <div class="icon-button" id="voteButton3">
+                                    <img class="voteIcon" src="src/end/culture_champ.png" alt="Culture Champion" />
+                                </div>
+                                <span class="button-label">Culture Champion</span>
+                            </div>
+                           
+
+                            <div class="iconParent" >
+                                <div class="icon-button" id="voteButton4">
+                                    <img class="voteIcon" src="src/end/diff_maker.png" alt="Difference Maker" />
+                                    
+                                </div>
+                                <span class="button-label">Difference Maker</span>
+                            </div>
+                        </div>
+                    
+
+                <div class="bottomVote box_transparentUserList">
+                        <textarea name="commentField" id="commentField" placeholder="Leave a comment..." maxlength="500"></textarea>
+                        <button id="endorseButton" disabled>Endorse</button>
+                </div>
+                    
+        </div>
+
+
+    </div>
+
+</main>
 <script>
 $(document).ready(function() {
-      
-
     // AJAX GET
     $.ajax({
         url: 'php/getUsers.php',
@@ -147,7 +95,6 @@ $(document).ready(function() {
                                 <img src="src/pfp.jpg" alt="${user.name}"> 
                                 <span>${user.name} ${user.surname}</span>
                                </div>`;
-                        
                 });
                 $("#userList").html(output);
             } else {
@@ -159,7 +106,8 @@ $(document).ready(function() {
             $("#userList").html("Error fetching user data.");
         }
     });
-    // AJAX
+
+    // When a user is selected
     $(document).on('click', '.userItem', function() {
         $('.userItem').removeClass('selected');
         $(this).addClass('selected');
@@ -172,49 +120,51 @@ $(document).ready(function() {
         var userSurname = $(this).data('surname');
 
         $("#selectedUserInfo").html(`<p><strong>${userName} ${userSurname}</strong></p>
-                                      <img src="src/pfp.jpg" alt="${userName}" style="width: 100px; height: 100px; border-radius: 50%;">`);
+                                      <img class="pfpSelected" src="src/pfp.jpg" alt="${userName}"">`);
 
         $('#commentField').prop('disabled', false);
         $("#voteButtons").show();
 
-        checkFormValidity();
+        checkFormValidity(); // Check if the form is valid after user selection
     });
 
+    // When an icon button is clicked
     $('.icon-button').on('click', function() {
         $(this).toggleClass('active');
         checkFormValidity();
     });
 
+    // Function to check the validity of the form
     function checkFormValidity() {
         var comment = $('#commentField').val().trim();
         var atLeastOneActive = $('.icon-button.active').length > 0;
+        var atLeastOneUserSelected = $('.userItem.selected').length > 0;  // Check if any user is selected
 
-        // Enable the endorse button if comment is filled and at least one button is active
-        if (comment.length > 0 && atLeastOneActive) {
+        // Enable the endorse button if comment is filled, at least one button is active, and a user is selected
+        if (comment.length > 0 && atLeastOneActive && atLeastOneUserSelected) {
             $('#endorseButton').prop('disabled', false);
         } else {
             $('#endorseButton').prop('disabled', true);
         }
     }
 
+    // When the comment field is updated
     $('#commentField').on('input', function() {
         checkFormValidity();
     });
 
     // Endorse button click (submit vote)
     $('#endorseButton').on('click', function() {
-        
         var selectedUserId = $(".userItem.selected").data('id');  // Get the selected votee ID
         var comment = $('#commentField').val();
 
-       
         var work_fun_temp = false;
         var culture_champ_temp = false;
         var team_player_temp = false;
         var diff_maker_temp = false;
 
         if ($('#voteButton1').hasClass('icon-button active')) {
-        work_fun_temp = true;
+            work_fun_temp = true;
         }
         if ($('#voteButton2').hasClass('icon-button active')) {
             team_player_temp = true;
@@ -233,18 +183,18 @@ $(document).ready(function() {
                 // voter id we get from session
                 votee_id: selectedUserId,  
 
-                //endorsements
+                // endorsements
                 work_fun: work_fun_temp, 
-                team_player: team_player_temp ,
+                team_player: team_player_temp,
                 culture_champ: culture_champ_temp, 
                 diff_maker: diff_maker_temp, 
-                //comment
+                // comment
                 comment: comment  
             },
             success: function(response) {
                 alert("Vote submitted successfully!");
-                
-                //clear field
+
+                // Clear fields
                 $('#commentField').val('');
                 $('.icon-button').removeClass('active');
                 $('#endorseButton').prop('disabled', true);

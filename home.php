@@ -40,48 +40,64 @@
     </div>
 
     <main>
-       <div class="main-box top">
-          <div class="top">
-                <div class="box" style="padding: 10px;">
+     <div class="box" style="background: #e1f1fd; width:900px;">
+       <div class="main-box top"  style=" display: flex; flex-direction: row; justify-content:space-between;">
+          
+                <div class="box_transparent" style="padding: 10px; ">
                     <div>
                         <div class="user" style="background-image:url('src/pfp.jpg'); display: inline-block; vertical-align: middle;"></div>
-                        <p style="display: inline-block; vertical-align:bottom; margin-left: 10px;">
-                            Hello <b><?php echo $name ?></b> <b><?php echo $surname ?></b>, <br>Welcome</p>
+                        <p style="display: inline-block; vertical-align:middle; margin-left: 10px;">
+                            Hello <span style="color:rgb(84, 178, 211); font-size:20px;"><b> <?php echo $name ?></b> <b><?php echo $surname ?></b> </span>, <br>Welcome</p>
                     </div>
                 </div>
 
-                <div>
-                    <a href="vote.php"><button class="btn">Vote</button></a>
-                </div>
+                
+                    <a href="vote.php" style="display: inline-block; vertical-align:middle; margin-right: 10px;">
+                        <button class="btn" style ="padding: 0px 40px; margin-top: 0px; display: inline-block; vertical-align:middle;">Vote</button>
+                    </a>
+                
           </div>
 
           <div class="bottom">
-              <div class="box" style="flex-direction: row; justify-content:space-around;">
-                    <div>
+              <div class="box_transparentVotes" >
+                    
+                    <div class="box_transparent" style=" flex-direction:column;  align-items:center; width:188px; height:100%;">
+                    <img src="src/win/makes_work_fun_winner.png" alt="cultureChampWinner" style=" width: 100px; height: 100px;   ">
                         Makes Work Fun
-                        <div id="workFunWinner"></div> 
+                        <div id="workFunWinner" class="textWinner" "></div> 
                     </div>
-                    <div>
+                    <div class="box_transparent" style=" flex-direction:column;  align-items:center; width:188px; height:100%;">
+                    <img src="src/win/team_player_winner.png" alt="cultureChampWinner" style=" width: 100px; height: 100px; ">
                         Team Player
-                        <div id="teamPlayerWinner"></div> 
+                        <div id="teamPlayerWinner"  class="textWinner" "></div> 
                     </div>
-                    <div>
+                    <div class="box_transparent" style=" flex-direction:column;  align-items:center; width:188px; height:100%;">
+                    <img src="src/win/culture_champ_winner.png" alt="cultureChampWinner" style=" width: 100px; height: 100px; ">
                         Culture Champ
-                        <div id="cultureChampWinner"></div> 
+                        <div id="cultureChampWinner" class="textWinner"> >No Person Won this yet!</div> 
                     </div>
-                    <div>
+                    <div class="box_transparent" style=" flex-direction:column;  align-items:center; width:188px; height:100%;" >
+                    <img src="src/win/diff_maker_winner.png" alt="cultureChampWinner" style=" width: 100px; height: 100px;  ">
                         Difference Maker
-                        <div id="diffMakerWinner"></div> 
+                        <div class="textWinner" id="diffMakerWinner"  >No Person Won this yet!</div> 
                     </div>
               </div>
           </div>
 
           <div class="bottom">
               <div style="display: flex; flex-direction: row; justify-content:space-between;">
-                    <div class="box" id="mostVoter">Most Voter</div>
-                    <div class="box" id="latestVotes">Latest Votes</div>
+                    <div class="box_transparent"style=" flex-direction:column;  align-items:center; width:250px; height: 250px; ">
+                            <img src="src/win/winner.png" alt="cultureChampWinner" style=" width: 100px; height: 100px;  ">
+                               
+                            Most Active Voter
+                            <div  id="mostVoter" class="textWinner" >No Person Won this yet!</div> 
+                    </div>
+
+
+                    <div class="box_transparent"  id="latestVotes" style="overflow:scroll; overflow-x: hidden; height:250px; margin-left: 35px; width:100%; ">No votes yet</div>
               </div>
           </div>
+       </div>
        </div>
     </main>
 
@@ -131,6 +147,11 @@
                 url: 'php/getWinner_culture_champ.php', 
                 type: 'GET',
                 success: function(response) {
+                    if(response==null)
+                {
+                    console.log("errpor");
+                }
+                else
                     handleResponse(response, '#cultureChampWinner'); 
                 },
                 error: function() {
@@ -140,7 +161,7 @@
 
             $.ajax({
                 url: 'php/getWinner_diff_maker.php', 
-                type: 'GET',
+                type: 'POST',
                 success: function(response) {
                     handleResponse(response, '#diffMakerWinner');
                     
@@ -152,7 +173,7 @@
 
            
             $.ajax({
-                url: 'php/getWinner_work_fun.php',
+                url: 'php/getMostOftenVoter.php',
                 type: 'GET',
                 success: function(response) {
                    handleResponse(response, '#mostVoter');
@@ -165,26 +186,26 @@
            
             $.ajax({
     url: 'php/getlatestVotes.php', 
-    type: 'GET',
+    type: 'POST',
     success: function(response) {
     var votesData = JSON.parse(response);
 
     var tableHTML = `
-        <table class="table">
+        <table >
        
             <tbody>
     `;
 
     votesData.forEach(function(entry) {
     tableHTML += `
-        <tr>
+        <tr class="table">
             <td>${entry.voter_name} ${entry.voter_surname}</td>
             <td>></td>
             <td>${entry.votee_name} ${entry.votee_surname}</td>
-            <td>${entry.work_fun === "1" ? '<img src="src/end/makes_work_fun.png" alt="Work Fun" style=" width: 50px; height: 50px;  border-radius: 50%;  margin-right: 10px;" />' : ''}</td>
-            <td>${entry.team_player === "1" ? '<img src="src/end/team_player.png" alt="Team Player" style=" width: 50px; height: 50px;  border-radius: 50%;  margin-right: 10px;"/>' : ''}</td>
-            <td>${entry.culture_champ === "1" ? '<img src="src/end/culture_champ.png" alt="Culture Champ" style=" width: 50px; height: 50px;  border-radius: 50%;  margin-right: 10px;"/>' : ''}</td>
-            <td>${entry.diff_maker === "1" ? '<img src="src/end/diff_maker.png" alt="Difference Maker" style=" width: 50px; height: 50px;  border-radius: 50%;  margin-right: 10px;"/>' : ''}</td>
+            <td class="">${entry.work_fun === "1" ? '<img class = "tableItems " src="src/end/makes_work_fun.png" alt="Work Fun" />' : ''}</td>
+            <td>${entry.team_player === "1" ? '<img  class = "tableItems " src="src/end/team_player.png" alt="Team Player" />' : ''}</td>
+            <td>${entry.culture_champ === "1" ? '<img class = "tableItems " src="src/end/culture_champ.png" alt="Culture Champ" />' : ''}</td>
+            <td>${entry.diff_maker === "1" ? '<img  class = "tableItems " src="src/end/diff_maker.png" alt="Difference Maker" />' : ''}</td>
         </tr>
     `;
 });

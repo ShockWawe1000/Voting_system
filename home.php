@@ -205,6 +205,7 @@
                     votesData.forEach(function(entry) {
                     tableHTML += `
                         <tr class="table">
+                        
                             <td>${entry.voter_name} ${entry.voter_surname}</td>
                             <td>></td>
                             <td>${entry.votee_name} ${entry.votee_surname}</td>
@@ -212,7 +213,8 @@
                             <td>${entry.team_player === "1" ? '<img  class = "tableItems " src="src/end/team_player.png" alt="Team Player" />' : ''}</td>
                             <td>${entry.culture_champ === "1" ? '<img class = "tableItems " src="src/end/culture_champ.png" alt="Culture Champ" />' : ''}</td>
                             <td>${entry.diff_maker === "1" ? '<img  class = "tableItems " src="src/end/diff_maker.png" alt="Difference Maker" />' : ''}</td>
-                        </tr>
+                        
+                     </tr>
                     `;
                 });
 

@@ -447,9 +447,10 @@ width: 70%;
     cursor: not-allowed;
 }
 
-.table{
+table{
    
     vertical-align:middle;
+    width: 100%;
   
 }
 
@@ -574,4 +575,11 @@ textarea[name='commentField'] {
     font-size:20px;
     text-align: center;
    
+}
+
+td{
+   
+    border-radius: 0%;
+    border-bottom: 1px solid rgb(84, 178, 211); 
+    text-align: center;
 }

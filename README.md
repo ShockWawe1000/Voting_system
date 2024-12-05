@@ -22,11 +22,34 @@ otherwise go to step 6;
 
 
 
-## The way i worked on this project
+## The way I worked on this project
+You can catch a glimpse in the pictures below of how I think, break down problems and guess issues.
+I began by looking at what I wanted at the end, taking away all the extra features and working on the barebones
 
 ![Image](misc/1.jpg)
+
+Then one by one, I implemented features I estimated would not delay me arriving at the deadline and still give me solid results
+
 ![Image](misc/2.jpg)
+
+Sometimes, not all features can or should be implemented. Adding more features clutters the user experience and breaks our image,
+making us take more time to solve problems
+
 ![Image](misc/3.jpg)
 
 ## Cat!
 ![Image](misc/cat2.jpg)
+
+## NOTICE READ THIS BEFORE YOU SEE MY CODE
+
+Please take into consideration that this is my first PHP project, and before this, I had practically 0 experience writing PHP. 
+Surprisingly the PHP part was the easiest part, as I blew right through every obstacle with PHP. 
+My biggest issue was working with JS, which I have experience with but not this in-depth. 
+AJAX and JQUERY were two technologies I have never worked with,  and as such you will notice a lot of redundant code because of it. 
+Most of this redundancy could have been avoided, and 99% of the project would have been pure PHP if I had learned a bit earlier that I could 
+put php values in between HTML. 
+I don't know if I breached any unspoken internship rule as I haven't read any but I feel morally obliged to notify you of the following:
+I have used AI in this project. But not as a code-writing tool but as a search engine to figure out problems and brainstorm ideas.
+I have also used code snippets from StackOverflow and a git repo from CodeSnippets for the certificate
+
+I hope this project shows you that even though I may not have the nescessary knowledge at first, I learn fast and always persevere, always resulting to success!

@@ -18,8 +18,9 @@ otherwise, go to step 6;
 5. Run Apache and MySQL (If you run into errors go to xampp/php/php.ini and uncomment the "extension=mysqli"
 6. Go to [localhost](http://localhost/phpmyadmin/) (or your db management tool of choice)
 7. Go to Import and drop the file from the project ( website/sql/db.sql )
-8. Finally visit the website on [website](http://localhost/website/)
-9. Please read the notice below before reading and dissecting the code!
+8. Set up the database info in php/config.pho
+9. Finally visit the website on [website](http://localhost/website/)
+10. Please read the notice below before reading and dissecting the code!
 
 
 
